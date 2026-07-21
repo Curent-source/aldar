@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const allPosts = Object.values(import.meta.glob('./blog/*.md', { eager: true }));
+const filteredPosts = allPosts.filter(
+    (post) => import.meta.env.DEV || !post.frontmatter.draft
+);
+const tags = [
+    ...new Set(filteredPosts.map((post) => post.frontmatter.tags).flat()),
+];
+const title = "Tag Index";
+---
+
+<BaseLayout date="Jan 03, 2022">
+    <div>
+        {
+            tags.map((tag) => (
+                <p>
+                    <a href={`/tags/${tag}`}>{tag}</a>
+                </p>
+            ))
+        }
+    </div>
+</BaseLayout>
