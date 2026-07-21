@@ -1,3 +1,0 @@
-pelican==4.10
-pelican-liquid-tags==1
-markdown==3.3.7
